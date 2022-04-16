@@ -9,13 +9,15 @@
 #include <dt-bindings/zmk/bt.h>
 
 #define MAIN 0
-#define SYM 1
-#define NAV 2
-#define BT 3
+#define COLE 1
+#define SYM 2
+#define NAV 3
+#define BT 4
+#define LAY 5
 
 &mt {
     flavor = "tap-preferred";
-    tapping_term_ms = <140>;
+    tapping_term_ms = <150>;
 };
 
 / {
@@ -71,8 +73,17 @@
         MAIN_layer {
             bindings = <
                             &kp W      &kp E       &kp R        &kp T            	&kp Y     &kp U      &kp I           &kp O
-          &kp Q &kp A       &kp S      &kp D       &lt SYM F    &kp G            	&kp H     &lt SYM J  &kp K           &kp L        &td0 &kp P
+          &lt LAY Q &kp A       &kp S      &kp D       &lt SYM F    &kp G            	&kp H     &lt SYM J  &kp K           &kp L        &td0 &kp P
                 &mt LSHFT Z &mt LALT X &mt LCTRL C &mt LGUI V   &lt BT B            &kp N     &mt RGUI M &mt RCTRL COMMA &mt RALT DOT &mt RSHFT FSLH
+                                                   &td1   	    &lt NAV BSPC     &sk RSHFT &kp ENTER 
+            >;
+        };
+		
+        COLE_layer {
+            bindings = <
+                            &kp W      &kp F       &kp P        &kp B            	&kp J     &kp L      &kp U           &kp Y
+          &lt LAY Q &kp A       &kp R      &kp S       &lt SYM T    &kp G            	&kp M     &lt SYM N  &kp E           &kp I        &kp O &td0
+                &mt LSHFT Z &mt LALT X &mt LCTRL C &mt LGUI D   &lt BT V            &kp K     &mt RGUI H &mt RCTRL COMMA &mt RALT DOT &mt RSHFT FSLH
                                                    &td1   	    &lt NAV BSPC     &sk RSHFT &kp ENTER 
             >;
         };
@@ -88,10 +99,10 @@
 
         NAV_layer {
             bindings = <
-                           &none 		&kp C_VOL_DN &kp C_VOL_UP 	 &none 		 	 	&none     &none     &none  &none
-     	&none 	&none      &kp C_PREV   &kp C_PP     &kp C_NEXT      &none              &kp LEFT  &kp DOWN  &kp UP &kp RIGHT &none &none
-                &none      &none 		&kp LC(TAB)  &kp LS(LC(TAB)) &none 		     	&none 	  &none     &none  &none     &none
-                                                     &none           &none              &trans    &trans
+                           &none 		&kp C_VOL_DN    &kp C_VOL_UP &none 		 	 	&none     &none     &none  &none
+     	&none 	&none      &kp C_PREV   &kp C_PP        &kp C_NEXT   &none              &kp LEFT  &kp DOWN  &kp UP &kp RIGHT &none &none
+                &none      &none 		&kp LS(LC(TAB)) &kp LC(TAB)  &none 		     	&none 	  &none     &none  &none     &none
+                                                        &none        &none              &trans    &trans
             >;
         };
 
@@ -103,5 +114,15 @@
                                   &none &none    &none &none
             >;
         };
+
+		LAY_layer {
+            bindings = <
+                      &none &none &none    &none    &none &none    &none &none
+          &none &none &none &none &tog MAIN &none   &none &tog COLE &none &none &none &none
+                &none &none &none &none    &none    &none &none    &none &none &none
+                                  &none    &none    &none &none
+            >;
+        };
+
     };
 };
